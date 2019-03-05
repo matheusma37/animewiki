@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout-padrao">
+
+    <div layout:fragment="conteudo">
+        <div class="card">
+            <img th:src="@{${anime.photo}}" class="card-img-top" alt="..."></img>
+            <div class="card-body">
+                <h5 class="card-title" th:text="${anime.name}"></h5>
+                <div class="row">
+                    <div class="col-md-2">Genre:</div>
+                    <div class="col-md-2">
+                        <p th:text="${anime.genre}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">Episodes:</div>
+                    <div class="col-md-2">
+                        <p th:text="${anime.numberOfEpisodes}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">Seasons:</div>
+                    <div class="col-md-2">
+                        <p th:text="${anime.numberOfSeasons}"></p>
+                    </div>
+                </div>
+                <p class="card-text text-break" th:text="${anime.description}"></p>
+            </div>
+            <div class="card-body">
+                <a th:href="@{/animes}" class="btn btn-primary btn-sm active">return</a>
+                <a href="" class="btn btn-danger btn-sm active" data-toggle="modal"
+                    data-target="#confirmaExclusaoModal" data-placement="top"
+		    th:attr="data-id=${anime.id}, data-name=${anime.name}, data-model='anime'">
+                    delete
+                </a>
+                <a th:href="@{/animes/update/}+${anime.id}" 
+                    class="btn btn-warning btn-sm text-white active">
+                    update
+                </a>
+            </div>
+        </div>
+        <div  th:replace="fragments/exclusao :: exclusao"></div>
+    </div>
+</html>

@@ -7,7 +7,7 @@
     <div layout:fragment="conteudo">
         <div class="panel panel-default" style="margin: 10px">
             <div class="panel-heading">
-                <h1 class="panel-title">Lista de personagens</h1>
+                <h1 class="panel-title">Lista de Animes</h1>
             </div>
             <div class="panel-body">
                 <table class="table">
@@ -15,30 +15,30 @@
                         <tr>
                             <th>Foto</th>
                             <th>Nome</th>
-                            <th>Altura</th>
-                            <th>Anime</th>
+                            <th>Episódios</th>
+                            <th>Temporadas</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="character : ${characters}">
-                            <td th:text="${character.photo}"></td>
+                        <tr th:each="anime : ${animes}">
+                            <td th:text="${anime.photo}"></td>
                             <td>
-                                <a th:href="@{/characters/show/}+${character.id}">
-                                    <span th:text="${character.name}"></span>
+                                <a th:href="@{/animes/show/}+${anime.id}">
+                                    <span th:text="${anime.name}"></span>
                                 </a>
                             </td>
-                            <td th:text="${character.height}"></td>
-                            <td th:text="${character.anime.name}"></td>
+                            <td th:text="${anime.numberOfEpisodes}"></td>
+                            <td th:text="${anime.numberOfSeasons}"></td>
                             <td>
-                                <a th:href="@{/characters/update/}+${character.id}" 
+                                <a th:href="@{/animes/update/}+${anime.id}" 
                                     class="btn btn-warning btn-sm text-white active">
                                     update
                                 </a>
                                 <a href="" class="btn btn-danger btn-sm active"
                                    data-toggle="modal" data-target="#confirmaExclusaoModal"
                                    data-placement="top"
-                                   th:attr="data-id=${character.id}, data-name=${character.name}, data-model='character'">
+                                   th:attr="data-id=${anime.id}, data-name=${anime.name}, data-model='anime'">
                                     delete
                                 </a>
                             </td>
@@ -47,10 +47,10 @@
                 </table>
             </div>
             <a href="" class="btn btn-success btn-sm active" data-toggle="modal"
-                    data-target="#formCharacter" data-placement="top">
+                    data-target="#formAnime" data-placement="top">
                     New
             </a>
-            <div th:replace="fragments/form-character :: form"></div>
+            <div th:replace="fragments/form-anime :: form"></div>
             <div  th:replace="fragments/exclusao :: exclusao"></div>
         </div>
     </div>

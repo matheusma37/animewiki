@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-2">Anime:</div>
                     <div class="col-md-2">
-                        <p th:text="${character.anime}"></p>
+                        <p th:text="${character.anime.name}"></p>
                     </div>
                 </div>
                 <div class="row">
@@ -42,11 +42,15 @@
                 </div>
             </div>
             <div class="card-body">
-                <a th:href="@{/characters}" class="btn btn-primary btn-sm active">Return</a>
+                <a th:href="@{/characters}" class="btn btn-primary btn-sm active">return</a>
                 <a href="" class="btn btn-danger btn-sm active" data-toggle="modal"
                     data-target="#confirmaExclusaoModal" data-placement="top"
 		    th:attr="data-id=${character.id}, data-name=${character.name}, data-model='character'">
-                    Delete
+                    delete
+                </a>
+                <a th:href="@{/characters/update/}+${character.id}" 
+                    class="btn btn-warning btn-sm text-white active">
+                    update
                 </a>
             </div>
         </div>

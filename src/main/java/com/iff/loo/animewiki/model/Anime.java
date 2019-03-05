@@ -1,17 +1,18 @@
 package com.iff.loo.animewiki.model;
 
 import java.io.Serializable;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class AnimeCharacter implements Serializable{
+public class Anime implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
@@ -19,10 +20,8 @@ public class AnimeCharacter implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
-    @JoinColumn(name = "anime_id")
-    @NotNull(message = "Anime é obrigatório!")
-    private Anime anime;  
+    @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL)
+    private Set<AnimeCharacter> characters; 
     
     @NotNull(message = "Nome é obrigatório!")
     @Column(length=100)
@@ -30,15 +29,11 @@ public class AnimeCharacter implements Serializable{
     @NotNull(message = "A descrição é obrigatória!")
     @Column(length=500)
     private String description;
-    @Column(length=100)
-    private String favoriteFood;
+    private String genre;
     @NotNull(message = "A foto é obrigatória!")
     private String photo;
-    @Column(precision=2, scale=2)
-    private float height;
-    @Column(precision=10, scale=2)
-    private float weight;
-    private int age;
+    private int numberOfEpisodes;
+    private int numberOfSeasons;
 
     public Long getId() {
         return id;
@@ -46,6 +41,14 @@ public class AnimeCharacter implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<AnimeCharacter> getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Set<AnimeCharacter> characters) {
+        this.characters = characters;
     }
 
     public String getName() {
@@ -64,12 +67,12 @@ public class AnimeCharacter implements Serializable{
         this.description = description;
     }
 
-    public String getFavoriteFood() {
-        return favoriteFood;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setFavoriteFood(String favoriteFood) {
-        this.favoriteFood = favoriteFood;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public String getPhoto() {
@@ -80,35 +83,19 @@ public class AnimeCharacter implements Serializable{
         this.photo = photo;
     }
 
-    public float getHeight() {
-        return height;
+    public int getNumberOfEpisodes() {
+        return numberOfEpisodes;
     }
 
-    public void setHeight(float height) {
-        this.height = height;
+    public void setNumberOfEpisodes(int numberOfEpisodes) {
+        this.numberOfEpisodes = numberOfEpisodes;
     }
 
-    public float getWeight() {
-        return weight;
+    public int getNumberOfSeasons() {
+        return numberOfSeasons;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Anime getAnime() {
-        return anime;
-    }
-
-    public void setAnime(Anime anime) {
-        this.anime = anime;
+    public void setNumberOfSeasons(int numberOfSeasons) {
+        this.numberOfSeasons = numberOfSeasons;
     }
 }

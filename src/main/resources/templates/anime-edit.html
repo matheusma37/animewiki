@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout-padrao">
+
+    <div layout:fragment="conteudo">
+        <div class="jumbotron p-3 mb-2 bg-light text-dark">
+            <form method="POST" th:object="${anime}"
+                  th:action="@{/animes}">
+                <div class="p-3 mb-2 bg-dark text-white">
+                    <h4>Edit Anime</h4>
+                </div>
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="name"></input>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea th:field="*{description}" class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <input th:field="*{genre}" type="text" class="form-control" id="genre"></input>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="numberOfEpisodes">Episodes</label>
+                        <input th:field="*{numberOfEpisodes}" type="number" min="0" class="form-control" id="numberOfEpisodes"></input>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="numberOfSeasons">Seasons</label>
+                        <input th:field="*{numberOfSeasons}" type="number" min="0" class="form-control" id="numberOfSeasons"></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="custom-file" style="margin-bottom: 15px;">
+                        <input th:field="*{photo}" type="file" class="custom-file-input" id="photo">
+                        <label class="custom-file-label" for="photo">Choose photo...</label>
+                    </div>
+                </div>
+                <div class="row p-3 mb-2 bg-dark text-white">
+                    <div class="col-1">
+                        <a th:href="@{/animes}" class="btn btn-danger">
+                            Cancel
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</html>

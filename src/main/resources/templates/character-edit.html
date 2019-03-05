@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout-padrao">
+
+    <div layout:fragment="conteudo">
+        <div class="jumbotron p-3 mb-2 bg-light text-dark">
+            <form method="POST" th:object="${character}"
+                  th:action="@{/characters}">
+                <div class="p-3 mb-2 bg-dark text-white">
+                    <h4>Edit Character</h4>
+                </div>
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input th:field="*{name}" type="text" class="form-control" id="name"></input>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea th:field="*{description}" class="form-control" id="description" rows="3"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                        <label for="anime">Anime</label>
+                        <select th:field="*{anime}" id="anime" class="form-control">
+                            <option selected="selected" value="">
+                                Choose...
+                            </option>
+                            <option th:each="a : ${animes}"
+                                    th:value="${a.id}" th:text="${a.name}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="favoriteFood">Favorite Food</label>
+                        <input th:field="*{favoriteFood}" type="text" class="form-control" id="favoriteFood"></input>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="height">Height</label>
+                            <input th:field="*{height}" type="text" min="0" pattern="[0-9]*\.[0-9]{1,2}" class="form-control" id="height"></input>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="weight">Weight</label>
+                            <input th:field="*{weight}" type="text" min="0" pattern="[0-9]*\.[0-9]{1,2}" class="form-control" id="weight"></input>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="age">Age</label>
+                            <input th:field="*{age}" type="number" min="0" class="form-control" id="age"></input>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-file" style="margin-bottom: 15px;">
+                            <input th:field="*{photo}" type="file" class="custom-file-input" id="photo">
+                            <label class="custom-file-label" for="photo">Choose photo...</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row p-3 mb-2 bg-dark text-white">
+                    <div class="col-1">
+                        <a th:href="@{/characters}" class="btn btn-danger">
+                            Cancel
+                        </a>
+                    </div>
+                    <div class="col-1">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</html>
