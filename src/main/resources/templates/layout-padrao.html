@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title>AnimeWiki</title>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width"></meta>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              crossorigin="anonymous"></link>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="row">
+            <div class="col" layout:insert="fragments/cabecalho">
+            </div>
+        </div>
+        <div class="row">
+            <span class="col" layout:insert="fragments/menu-lateral"></span>
+            <div class="col">
+                <div id="page-content-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col"
+                                 layout:fragment="conteudo">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <span class="col" layout:insert="fragments/footer"></span>
+        </div>
+    </body>
+</html>	

@@ -32,8 +32,7 @@ public class AnimeCharacterController {
     @RequestMapping(value="show/{id}", method=RequestMethod.GET)
     public ModelAndView show(@PathVariable Long id) {
             ModelAndView mv = new ModelAndView("character-show");
-            AnimeCharacter c = characters.getOne(id);
-            mv.addObject(c);
+            mv.addObject("character", characters.getOne(id));
             return mv;
     }
 

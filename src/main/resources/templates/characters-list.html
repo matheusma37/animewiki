@@ -1,18 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <title>Lista de Personagens</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    </head>
-    
-    <body>
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout-padrao">
+
+    <div layout:fragment="conteudo">
         <div class="panel panel-default" style="margin: 10px">
             <div class="panel-heading">
                 <h1 class="panel-title">Lista de personagens</h1>
@@ -30,74 +22,22 @@
                     <tbody>
                         <tr th:each="character : ${characters}">
                             <td th:text="${character.photo}"></td>
-                            <td th:text="${character.name}"></td>
+                            <td>
+                                <a th:href="@{/characters/show/}+${character.id}">
+                                    <span th:text="${character.name}"></span>
+                                </a>
+                            </td>
                             <td th:text="${character.height}"></td>
                             <td th:text="${character.anime}"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <button type="button" data-toggle="modal" data-target="#formCharacter">New</button>
-            <form method="POST" th:object="${character}">
-                <div class="modal fade" id="formCharacter" tabindex="-1" role="dialog" aria-labelledby="Form" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">New Character</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input th:field="*{name}" type="text" class="form-control" id="name"></input>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description">Description</label>
-                                    <textarea th:field="*{description}" class="form-control" id="description" rows="3"></textarea>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="anime">Anime</label>
-                                    <select th:field="*{anime}" id="anime" class="form-control">
-                                        <option value="1">Berserk</option>
-                                        <option value="2">Naruto</option>
-                                        <option value="3">Kabaneri</option>
-                                        <option value="4">Digimon</option>
-                                        <option value="5">Cavaleiros do Zodíaco</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="favoriteFood">Favorite Food</label>
-                                    <input th:field="*{favoriteFood}" type="text" class="form-control" id="favoriteFood"></input>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-5">
-                                        <label for="height">Height</label>
-                                        <input th:field="*{height}" type="text" min="0" pattern="[0-9]*\.[0-9]{1,2}" class="form-control" id="height"></input>
-                                    </div>
-                                    <div class="form-group col-md-5">
-                                        <label for="weight">Weight</label>
-                                        <input th:field="*{weight}" type="text" min="0" pattern="[0-9]*\.[0-9]{1,2}" class="form-control" id="weight"></input>
-                                    </div>
-                                    <div class="form-group col-md-2">
-                                        <label for="age">Age</label>
-                                        <input th:field="*{age}" type="number" min="0" class="form-control" id="age"></input>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="photo">Photo</label>
-                                    <input th:field="*{photo}" type="file" class="form-control-file" id="photo"></input>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <a href="" class="btn btn-success btn-sm active" data-toggle="modal"
+                    data-target="#formCharacter" data-placement="top">
+                    New
+            </a>
+            <div th:replace="fragments/form :: form"></div>
         </div>
-    </body>
+    </div>
 </html>
