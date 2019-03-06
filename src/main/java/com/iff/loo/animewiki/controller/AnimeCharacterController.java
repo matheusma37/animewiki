@@ -22,7 +22,7 @@ public class AnimeCharacterController {
 
     @RequestMapping("")
     public ModelAndView listAll() {
-        ModelAndView mv = new ModelAndView("characters-list");
+        ModelAndView mv = new ModelAndView("character/characters-list");
         mv.addObject("character", new AnimeCharacter());
         mv.addObject("animes",animes.findAll());
         mv.addObject("characters",characters.findAll());
@@ -31,7 +31,7 @@ public class AnimeCharacterController {
     
     @RequestMapping(value="show/{id}", method=RequestMethod.GET)
     public ModelAndView show(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("character-show");
+        ModelAndView mv = new ModelAndView("character/character-show");
         mv.addObject("animes",animes.findAll());
         mv.addObject("character", characters.getOne(id));
         return mv;
@@ -45,7 +45,7 @@ public class AnimeCharacterController {
 
     @RequestMapping(value="update/{id}")
     public ModelAndView update(@PathVariable Long id) {
-        ModelAndView mv = new ModelAndView("character-edit");
+        ModelAndView mv = new ModelAndView("character/character-edit");
         mv.addObject("animes",animes.findAll());
         mv.addObject("character", characters.getOne(id));
         return mv;

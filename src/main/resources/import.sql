@@ -2,7 +2,7 @@ insert into anime(id, name, description, photo, number_of_episodes, number_of_se
 insert into anime(id, name, description, photo, number_of_episodes, number_of_seasons, genre) values (2, "Naruto", "Anime de lutas ninjas.", "not", 720, 30, "luta");
 insert into anime(id, name, description, photo, number_of_episodes, number_of_seasons, genre) values (3, "Kabaneri", "Anime de zumbis.", "not", 12, 1, "aventura");
 insert into anime(id, name, description, photo, number_of_episodes, number_of_seasons, genre) values (4, "Digimon", "Anime sobre criaturas digitais que vão para a Terra.", "not", 51, 1, "aventura");
-insert into anime(id, name, description, photo, number_of_episodes, number_of_seasons, genre) values (5, "Cavaleiro do Zodíaco", "Anime sobre mitologia e lutas.", "not", 120, 5, "luta");
+insert into anime(id, name, description, photo, number_of_episodes, number_of_seasons, genre) values (5, "Cavaleiros do Zodíaco", "Anime sobre mitologia e lutas.", "not", 120, 5, "luta");
 
 insert into anime_character(id, anime_id, name, description, favorite_food, photo, height, weight, age) values (1, 1, "Guts", "Guerreiro que carrega uma enorme espada em busca de vingança.", "not", "not", 1.90, 90.0, 30);
 insert into anime_character(id, anime_id, name, description, favorite_food, photo, height, weight, age) values (2, 2, "Rock Lee", "Um ninja que nasceu sem habilidades para usar ninjutsu ou genjutsu e que busca mostrar seu valor apenas com taijutsu.", "not", "not", 1.70, 65.0, 18);

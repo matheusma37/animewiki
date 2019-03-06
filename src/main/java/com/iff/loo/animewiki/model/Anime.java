@@ -1,5 +1,6 @@
 package com.iff.loo.animewiki.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -20,6 +21,7 @@ public class Anime implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @JsonIgnore
     @OneToMany(mappedBy = "anime", cascade = CascadeType.ALL)
     private Set<AnimeCharacter> characters; 
     

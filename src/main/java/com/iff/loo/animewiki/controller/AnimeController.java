@@ -18,7 +18,7 @@ public class AnimeController {
 
     @RequestMapping("")
     public ModelAndView listAll() {
-            ModelAndView mv = new ModelAndView("animes-list");
+            ModelAndView mv = new ModelAndView("anime/animes-list");
             mv.addObject("anime", new Anime());
             mv.addObject("animes",animes.findAll());
             return mv;
@@ -26,7 +26,7 @@ public class AnimeController {
     
     @RequestMapping(value="show/{id}", method=RequestMethod.GET)
     public ModelAndView show(@PathVariable Long id) {
-            ModelAndView mv = new ModelAndView("anime-show");
+            ModelAndView mv = new ModelAndView("anime/anime-show");
             mv.addObject("anime", animes.getOne(id));
             return mv;
     }
@@ -39,7 +39,7 @@ public class AnimeController {
 
     @RequestMapping(value="update/{id}")
     public ModelAndView update(@PathVariable Long id) {
-            ModelAndView mv = new ModelAndView("anime-edit");
+            ModelAndView mv = new ModelAndView("anime/anime-edit");
             mv.addObject("anime", animes.getOne(id));
             return mv;
     }
