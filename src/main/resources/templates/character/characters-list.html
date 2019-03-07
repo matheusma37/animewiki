@@ -22,7 +22,11 @@
                     </thead>
                     <tbody>
                         <tr th:each="character : ${characters}">
-                            <td th:text="${character.photo}"></td>
+                            <td>
+                                <img th:src="@{${'/images/character/' + character.photo}}"
+                                     th:alt="${character.name}"
+                                     width="100px" height="100px"></img>
+                            </td>
                             <td>
                                 <a th:href="@{/characters/show/}+${character.id}">
                                     <span th:text="${character.name}"></span>

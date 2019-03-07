@@ -7,7 +7,7 @@
     <div layout:fragment="conteudo">
         <div class="jumbotron p-3 mb-2 bg-light text-dark">
             <form method="POST" th:object="${character}"
-                  th:action="@{/characters}">
+                  th:action="@{/characters}" enctype="multipart/form-data">
                 <div class="p-3 mb-2 bg-dark text-white">
                     <h4>Edit Character</h4>
                 </div>
@@ -51,8 +51,8 @@
                     </div>
                     <div class="form-group">
                         <div class="custom-file" style="margin-bottom: 15px;">
-                            <input th:field="*{photo}" type="file" class="custom-file-input" id="photo">
-                            <label class="custom-file-label" for="photo">Choose photo...</label>
+                            <input name="file" type="file" class="custom-file-input" id="file">
+                            <label class="custom-file-label" for="file">Choose photo...</label>
                         </div>
                     </div>
                 </div>

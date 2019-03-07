@@ -6,7 +6,8 @@
 
     <div layout:fragment="conteudo">
         <div class="card">
-            <img th:src="@{${anime.photo}}" class="card-img-top" alt="..."></img>
+            <img th:src="@{${'/images/anime/' + anime.photo}}"
+                 class="card-img-top" th:alt="anime.name" height="300px"></img>
             <div class="card-body">
                 <h5 class="card-title" th:text="${anime.name}"></h5>
                 <div class="row">
