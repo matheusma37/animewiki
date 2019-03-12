@@ -1,6 +1,7 @@
 package com.iff.loo.animewiki.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -27,17 +29,24 @@ public class AnimeCharacter implements Serializable{
     @NotNull(message = "Nome é obrigatório!")
     @Column(length=100)
     private String name;
+    
     @NotNull(message = "A descrição é obrigatória!")
     @Column(length=500)
     private String description;
+    
     @Column(length=100)
     private String favoriteFood;
-    @NotNull(message = "A foto é obrigatória!")
-    private String photo;
+    
+    @OneToOne(mappedBy = "character", cascade = CascadeType.ALL)
+    @NotNull(message = "Foto é obrigatória!")
+    private Photo photo;
+    
     @Column(precision=2, scale=2)
     private float height;
+    
     @Column(precision=10, scale=2)
     private float weight;
+    
     private int age;
 
     public Long getId() {
@@ -72,11 +81,11 @@ public class AnimeCharacter implements Serializable{
         this.favoriteFood = favoriteFood;
     }
 
-    public String getPhoto() {
+    public Photo getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Photo photo) {
         this.photo = photo;
     }
 

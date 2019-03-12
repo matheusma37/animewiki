@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,13 +29,19 @@ public class Anime implements Serializable{
     @NotNull(message = "Nome é obrigatório!")
     @Column(length=100)
     private String name;
+    
     @NotNull(message = "A descrição é obrigatória!")
     @Column(length=500)
     private String description;
+    
     private String genre;
-    @NotNull(message = "A foto é obrigatória!")
-    private String photo;
+    
+    @OneToOne(mappedBy = "anime", cascade = CascadeType.ALL)
+    @NotNull(message = "Foto é obrigatória!")
+    private Photo photo;
+    
     private int numberOfEpisodes;
+    
     private int numberOfSeasons;
 
     public Long getId() {
@@ -77,11 +84,11 @@ public class Anime implements Serializable{
         this.genre = genre;
     }
 
-    public String getPhoto() {
+    public Photo getPhoto() {
         return photo;
     }
 
-    public void setPhoto(String photo) {
+    public void setPhoto(Photo photo) {
         this.photo = photo;
     }
 

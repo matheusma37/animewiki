@@ -1,7 +1,9 @@
 package com.iff.loo.animewiki.controller;
 
 import com.iff.loo.animewiki.model.Anime;
+import com.iff.loo.animewiki.model.Photo;
 import com.iff.loo.animewiki.repository.Animes;
+import com.iff.loo.animewiki.repository.Photos;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,6 +25,9 @@ public class AnimeController {
     
     @Autowired
     Animes animes;
+    
+    @Autowired 
+    Photos photos;
 
     @RequestMapping("")
     public ModelAndView listAll() {
@@ -45,20 +50,14 @@ public class AnimeController {
         if(imageFile.isEmpty()){
             return "redirect:/animes";
         }
-        Path absolutePath = Paths.get(".").toAbsolutePath();
-        a.setPhoto(a.getName() + imageFile.getOriginalFilename());
+        Photo photo = new Photo();
+        photo.setName(a.getName() + imageFile.getOriginalFilename());
         try {
-            Files.write(
-                    Paths.get(absolutePath +
-                            "/src/main/resources/static/images/anime/" +
-                            a.getName() + imageFile.getOriginalFilename()
-                    ),
-                    imageFile.getBytes()
-            );
+            photo.setFile(imageFile.getBytes());
         } catch (IOException ex) {
-            Logger.getLogger(AnimeCharacterController.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            return "redirect:/animes";
         }
+        a.setPhoto(photo);
         animes.save(a);
         return "redirect:/animes";
     }
