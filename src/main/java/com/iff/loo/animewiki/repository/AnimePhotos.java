@@ -1,8 +1,8 @@
 package com.iff.loo.animewiki.repository;
 
-import com.iff.loo.animewiki.model.Photo;
+import com.iff.loo.animewiki.model.AnimePhoto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface Photos extends JpaRepository<Photo, Long>{
+public interface AnimePhotos extends JpaRepository<AnimePhoto, Long>{
     
 }

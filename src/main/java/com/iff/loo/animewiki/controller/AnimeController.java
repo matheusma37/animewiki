@@ -1,15 +1,9 @@
 package com.iff.loo.animewiki.controller;
 
 import com.iff.loo.animewiki.model.Anime;
-import com.iff.loo.animewiki.model.Photo;
+import com.iff.loo.animewiki.model.AnimePhoto;
 import com.iff.loo.animewiki.repository.Animes;
-import com.iff.loo.animewiki.repository.Photos;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.iff.loo.animewiki.repository.AnimePhotos;
 
 @Controller
 @RequestMapping("/animes")
@@ -27,7 +22,7 @@ public class AnimeController {
     Animes animes;
     
     @Autowired 
-    Photos photos;
+    AnimePhotos photos;
 
     @RequestMapping("")
     public ModelAndView listAll() {
@@ -50,8 +45,8 @@ public class AnimeController {
         if(imageFile.isEmpty()){
             return "redirect:/animes";
         }
-        Photo photo = new Photo();
-        photo.setName(a.getName() + imageFile.getOriginalFilename());
+        AnimePhoto photo = new AnimePhoto();
+        photo.setName(imageFile.getOriginalFilename());
         try {
             photo.setFile(imageFile.getBytes());
         } catch (IOException ex) {

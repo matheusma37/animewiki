@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class Anime implements Serializable{
     
     @OneToOne(mappedBy = "anime", cascade = CascadeType.ALL)
     @NotNull(message = "Foto é obrigatória!")
-    private Photo photo;
+    private AnimePhoto photo;
     
     private int numberOfEpisodes;
     
@@ -84,11 +85,11 @@ public class Anime implements Serializable{
         this.genre = genre;
     }
 
-    public Photo getPhoto() {
+    public AnimePhoto getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Photo photo) {
+    public void setPhoto(AnimePhoto photo) {
         this.photo = photo;
     }
 

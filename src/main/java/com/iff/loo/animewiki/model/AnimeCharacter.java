@@ -39,7 +39,7 @@ public class AnimeCharacter implements Serializable{
     
     @OneToOne(mappedBy = "character", cascade = CascadeType.ALL)
     @NotNull(message = "Foto é obrigatória!")
-    private Photo photo;
+    private CharacterPhoto photo;
     
     @Column(precision=2, scale=2)
     private float height;
@@ -81,11 +81,11 @@ public class AnimeCharacter implements Serializable{
         this.favoriteFood = favoriteFood;
     }
 
-    public Photo getPhoto() {
+    public CharacterPhoto getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Photo photo) {
+    public void setPhoto(CharacterPhoto photo) {
         this.photo = photo;
     }
 
