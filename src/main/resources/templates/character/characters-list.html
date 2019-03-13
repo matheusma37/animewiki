@@ -23,9 +23,17 @@
                     <tbody>
                         <tr th:each="character : ${characters}">
                             <td>
-                                <img th:src="@{${'/images/character/' + character.photo}}"
-                                     th:alt="${character.name}"
-                                     width="100px" height="100px"></img>
+                                <span th:if="${character.photo != null}">
+                                    <img th:src="@{'/myImage/character/imageDisplay?id=' + ${character.photo.id}}"
+                                         th:alt="${character.name}"
+                                         alt=""
+                                         width="100px" height="100px"></img>
+                                </span>
+                                <span th:if="${character.photo == null}">
+                                    <img th:src="@{'/images/character/blank.png'}"
+                                         alt="Este anime não possui uma foto atribuída."
+                                         width="100px" height="100px"></img>
+                                </span>
                             </td>
                             <td>
                                 <a th:href="@{/characters/show/}+${character.id}">

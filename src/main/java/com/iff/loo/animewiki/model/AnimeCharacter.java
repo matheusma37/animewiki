@@ -38,7 +38,6 @@ public class AnimeCharacter implements Serializable{
     private String favoriteFood;
     
     @OneToOne(mappedBy = "character", cascade = CascadeType.ALL)
-    @NotNull(message = "Foto é obrigatória!")
     private CharacterPhoto photo;
     
     @Column(precision=2, scale=2)

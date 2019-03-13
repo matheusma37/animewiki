@@ -48,18 +48,26 @@ public class AnimeCharacterController {
     @RequestMapping(value="",method=RequestMethod.POST)
     public String save(AnimeCharacter c,
             @RequestParam("file") MultipartFile imageFile) {
-        if(imageFile.isEmpty()){
+        
+        if(imageFile.isEmpty() && c.getId() == null){
             return "redirect:/characters";
+        }else if(c.getId() != null && imageFile.isEmpty()){
+            characters.save(c);
+        } else{
+            CharacterPhoto photo = new CharacterPhoto();
+            photo.setName(imageFile.getOriginalFilename());
+            try {
+                photo.setFile(imageFile.getBytes());
+            } catch (IOException ex) {
+                return "redirect:/characters";
+            }
+            photos.save(photo);
+            characters.save(c);
+            photo.setCharacter(c);
+            c.setPhoto(photo);
+            photos.save(photo);
+            characters.save(c);
         }
-        CharacterPhoto photo = new CharacterPhoto();
-        photo.setName(imageFile.getOriginalFilename());
-        try {
-            photo.setFile(imageFile.getBytes());
-        } catch (IOException ex) {
-            return "redirect:/characters";
-        }
-        c.setPhoto(photo);
-        characters.save(c);
         return "redirect:/characters";
     }
 

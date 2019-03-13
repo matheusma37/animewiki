@@ -58,7 +58,7 @@ public class CharacterPhoto implements Serializable{
         return character;
     }
 
-    public void setAnime(AnimeCharacter character) {
+    public void setCharacter(AnimeCharacter character) {
         this.character = character;
     }
 }

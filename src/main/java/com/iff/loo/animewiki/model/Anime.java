@@ -38,7 +38,6 @@ public class Anime implements Serializable{
     private String genre;
     
     @OneToOne(mappedBy = "anime", cascade = CascadeType.ALL)
-    @NotNull(message = "Foto é obrigatória!")
     private AnimePhoto photo;
     
     private int numberOfEpisodes;

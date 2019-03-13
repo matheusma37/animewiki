@@ -1,6 +1,8 @@
 package com.iff.loo.animewiki.controller;
 
 import com.iff.loo.animewiki.model.AnimeCharacter;
+import com.iff.loo.animewiki.model.CharacterPhoto;
+import com.iff.loo.animewiki.repository.CharacterPhotos;
 import com.iff.loo.animewiki.repository.Characters;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +23,9 @@ public class ApiAnimeCharacterController {
     
     @Autowired
     private Characters characters;
+    
+    @Autowired
+    private CharacterPhotos photos;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Collection<AnimeCharacter> listAllCharacters() {
@@ -52,6 +57,12 @@ public class ApiAnimeCharacterController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public  ResponseEntity<?> saveCharacter(@RequestBody AnimeCharacter character) {
+        CharacterPhoto photo = character.getPhoto();
+        photos.save(photo);
+        characters.save(character);
+        photo.setCharacter(character);
+        character.setPhoto(photo);
+        photos.save(photo);
         return new ResponseEntity<AnimeCharacter> (characters.save(character), HttpStatus.OK);
     }
 }

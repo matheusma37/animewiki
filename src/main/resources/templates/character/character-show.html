@@ -6,8 +6,17 @@
 
     <div layout:fragment="conteudo">
         <div class="card">
-            <img th:src="@{${'/images/character/' + character.photo}}"
-                 class="card-img-top" th:alt="${character.name}" height="300px">
+            <span th:if="${character.photo != null}">
+                <img th:src="@{'/myImage/character/imageDisplay?id=' + ${character.photo.id}}"
+                     th:alt="${character.name}"
+                     alt=""
+                     width="800px" height="400px"></img>
+            </span>
+            <span th:if="${character.photo == null}">
+                <img th:src="@{'/images/character/blank.png'}"
+                     alt="Este anime não possui uma foto atribuída."
+                     width="800px" height="400px"></img>
+            </span>
             </img>
             <div class="card-body">
                 <h5 class="card-title" th:text="${character.name}"></h5>

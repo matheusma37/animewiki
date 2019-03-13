@@ -42,18 +42,26 @@ public class AnimeController {
     @RequestMapping(value="",method=RequestMethod.POST)
     public String save(Anime a,
             @RequestParam("file") MultipartFile imageFile) {
-        if(imageFile.isEmpty()){
+
+        if(imageFile.isEmpty() && a.getId() == null){
             return "redirect:/animes";
+        }else if(a.getId() != null && imageFile.isEmpty()){
+            animes.save(a);
+        } else{
+            AnimePhoto photo = new AnimePhoto();
+            photo.setName(imageFile.getOriginalFilename());
+            try {
+                photo.setFile(imageFile.getBytes());
+            } catch (IOException ex) {
+                return "redirect:/animes";
+            }
+            photos.save(photo);
+            animes.save(a);
+            photo.setAnime(a);
+            a.setPhoto(photo);
+            photos.save(photo);
+            animes.save(a);
         }
-        AnimePhoto photo = new AnimePhoto();
-        photo.setName(imageFile.getOriginalFilename());
-        try {
-            photo.setFile(imageFile.getBytes());
-        } catch (IOException ex) {
-            return "redirect:/animes";
-        }
-        a.setPhoto(photo);
-        animes.save(a);
         return "redirect:/animes";
     }
 

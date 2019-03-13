@@ -1,6 +1,8 @@
 package com.iff.loo.animewiki.controller;
 
 import com.iff.loo.animewiki.model.Anime;
+import com.iff.loo.animewiki.model.AnimePhoto;
+import com.iff.loo.animewiki.repository.AnimePhotos;
 import com.iff.loo.animewiki.repository.Animes;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,8 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/animes")
 public class ApiAnimeController {
+    
     @Autowired
     private Animes animes;
+    
+    @Autowired
+    private AnimePhotos photos;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Collection<Anime> listAllAnimes() {
@@ -51,6 +57,12 @@ public class ApiAnimeController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     public  ResponseEntity<?> saveAnime(@RequestBody Anime anime) {
+        AnimePhoto photo = anime.getPhoto();
+        photos.save(photo);
+        animes.save(anime);
+        photo.setAnime(anime);
+        anime.setPhoto(photo);
+        photos.save(photo);
         return new ResponseEntity<Anime>(animes.save(anime), HttpStatus.OK);
     }
 }
