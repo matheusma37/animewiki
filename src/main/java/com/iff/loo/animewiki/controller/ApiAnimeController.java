@@ -4,10 +4,15 @@ import com.iff.loo.animewiki.model.Anime;
 import com.iff.loo.animewiki.model.AnimePhoto;
 import com.iff.loo.animewiki.repository.AnimePhotos;
 import com.iff.loo.animewiki.repository.Animes;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +32,28 @@ public class ApiAnimeController {
     @Autowired
     private AnimePhotos photos;
 
+    @RequestMapping(value = "/anime/photo/{id}",
+            method = RequestMethod.GET)
+    public void getPhoto(@PathVariable("id") Long id,
+            HttpServletResponse response) throws IOException {
+        AnimePhoto photo;
+        try{
+            photo = animes.getOne(id).getPhoto();
+            response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+            response.getOutputStream().write(photo.getFile());
+        }catch(NullPointerException ex){
+            Path absolutePath = Paths.get("").toAbsolutePath();
+            byte[] file = Files.readAllBytes(Paths.get(absolutePath +
+                                "/src/main/resources/static/images/" +
+                                "anime/blank.jpg"
+                            )
+                        );
+            response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+            response.getOutputStream().write(file);
+        }
+        response.getOutputStream().close();
+    }
+    
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Collection<Anime> listAllAnimes() {
         return animes.findAll();
