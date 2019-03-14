@@ -23,7 +23,7 @@
                     <tbody>
                         <tr th:each="character : ${characters}">
                             <td>
-                                <img th:src="@{${'/images/character/' + character.photo}}"
+                                <img th:src="@{'/images/character/' + ${character.photo}}"
                                      th:alt="${character.name}"
                                      width="100px" height="100px"></img>
                             </td>

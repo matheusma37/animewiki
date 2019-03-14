@@ -32,7 +32,6 @@ public class AnimeCharacter implements Serializable{
     private String description;
     @Column(length=100)
     private String favoriteFood;
-    @NotNull(message = "A foto é obrigatória!")
     private String photo;
     @Column(precision=2, scale=2)
     private float height;

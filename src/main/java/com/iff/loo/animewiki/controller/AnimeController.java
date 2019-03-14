@@ -42,22 +42,26 @@ public class AnimeController {
     @RequestMapping(value="",method=RequestMethod.POST)
     public String save(Anime a,
             @RequestParam("file") MultipartFile imageFile) {
-        if(imageFile.isEmpty()){
+        if(imageFile.isEmpty() && a.getId() == null){
             return "redirect:/animes";
-        }
-        Path absolutePath = Paths.get(".").toAbsolutePath();
-        a.setPhoto(a.getName() + imageFile.getOriginalFilename());
-        try {
-            Files.write(
-                    Paths.get(absolutePath +
-                            "/src/main/resources/static/images/anime/" +
-                            a.getName() + imageFile.getOriginalFilename()
-                    ),
-                    imageFile.getBytes()
-            );
-        } catch (IOException ex) {
-            Logger.getLogger(AnimeCharacterController.class.getName())
-                    .log(Level.SEVERE, null, ex);
+        }else if(a.getId() != null && imageFile.isEmpty()){
+            a.setPhoto(animes.getOne(a.getId()).getPhoto());
+            animes.save(a);
+        } else{
+            Path absolutePath = Paths.get(".").toAbsolutePath();
+            a.setPhoto(a.getName() + imageFile.getOriginalFilename());
+            try {
+                Files.write(
+                        Paths.get(absolutePath +
+                                "/src/main/resources/static/images/anime/" +
+                                a.getName() + imageFile.getOriginalFilename()
+                        ),
+                        imageFile.getBytes()
+                );
+            } catch (IOException ex) {
+                Logger.getLogger(AnimeCharacterController.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
         animes.save(a);
         return "redirect:/animes";

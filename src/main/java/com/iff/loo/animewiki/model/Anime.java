@@ -32,7 +32,6 @@ public class Anime implements Serializable{
     @Column(length=500)
     private String description;
     private String genre;
-    @NotNull(message = "A foto é obrigatória!")
     private String photo;
     private int numberOfEpisodes;
     private int numberOfSeasons;
